@@ -1,23 +1,25 @@
-import { FiShoppingCart } from "react-icons/fi";
+
 import { getImgUrl } from "../../Utils/getImgUrl";
 import { Link } from "react-router-dom";
-
-import { useDispatch } from'react-redux'
-import { addToCart } from '../../Redux/features/cart/cartSlice'
+import { useDispatch } from "react-redux";
+import { addToCart, clearCartMessage } from "../../Redux/features/cart/cartSlice";
+import { useEffect } from "react";
 
 const BookCard = ({ book }) => {
-  const dispatch =  useDispatch();
-
+  const dispatch = useDispatch();
 
   const handleAddToCart = (product) => {
-    dispatch(addToCart(product))
-}
+    dispatch(addToCart(product));
 
-
+    // Clear the message after 3 seconds
+    setTimeout(() => {
+      dispatch(clearCartMessage());
+    }, 3000);
+  };
 
   return (
-    <div className=" rounded-lg transition-shadow duration-300">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:h-72  sm:justify-center gap-4">
+    <div className="rounded-lg transition-shadow duration-300">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:h-72 sm:justify-center gap-4">
         <div className="sm:h-72 sm:flex-shrink-0 border rounded-md">
           <a href="/">
             <img
@@ -34,21 +36,23 @@ const BookCard = ({ book }) => {
               {book.title}
             </h3>
           </Link>
-          <p className="text-gray-600 mb-5">{book?.description.length > 80 ? `${book.description.slice(0, 80)}...` : book?.description}</p>
+          <p className="text-gray-600 mb-5">
+            {book?.description.length > 80 ? `${book.description.slice(0, 80)}...` : book?.description}
+          </p>
           <p className="font-medium mb-5">
-                        ${book?.newPrice} <span className="line-through font-normal ml-2">$ {book?.oldPrice}</span>
-                    </p>
+            Rs.{book?.newPrice} <span className="line-through font-normal ml-2">Rs. {book?.oldPrice}</span>
+          </p>
           <button
-             onClick={() => handleAddToCart(book)}
+            onClick={() => handleAddToCart(book)}
             className="bg-blue-600 text-white px-6 py-2 flex items-center gap-2 rounded-lg 
              transition-all duration-300 ease-in-out 
            hover:bg-blue-500 hover:scale-105 hover:shadow-lg"
           >
-            <FiShoppingCart className="text-lg" />
+           
             <span>Add to Cart</span>
           </button>
         </div>
-      </div> 
+      </div>
     </div>
   );
 };

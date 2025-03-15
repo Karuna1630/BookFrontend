@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { HiMiniBars3CenterLeft } from "react-icons/hi2";
 import { IoSearchSharp } from "react-icons/io5";
@@ -6,7 +6,8 @@ import { FaRegUser } from "react-icons/fa6";
 import { FiHeart } from "react-icons/fi";
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import profileImg from "../assets/profileavatar.png";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { clearCartMessage } from "../Redux/features/cart/cartSlice";
 
 const Navigation = [
   { name: "Dashboard", href: "/dashboard" },
@@ -19,15 +20,29 @@ const Navigation = [
 const Navbar = () => {
   const [isDropdownOpen, setIsDropDownOpen] = useState(false);
   const cartItems = useSelector((state) => state.cart.cartItems);
-
+  const cartMessage = useSelector((state) => state.cart.cartMessage); // Get cart message
+  const dispatch = useDispatch();
   const currentuser = false;
+
+  // Clear message after 3 seconds
+  useEffect(() => {
+    if (cartMessage) {
+      const timer = setTimeout(() => {
+        dispatch(clearCartMessage());
+      }, 3000);
+      return () => clearTimeout(timer); // Cleanup function
+    }
+  }, [cartMessage, dispatch]);
 
   return (
     <div className="max-w-screen-2xl mx-auto px-6 py-3 shadow-lg bg-white sticky top-0 z-50 border-b">
       <nav className="flex justify-between items-center px-3">
         {/* Left Side */}
         <div className="flex items-center gap-4">
-          <Link to="/" className="p-2 hover:bg-gray-200 rounded-lg transition duration-300">
+          <Link
+            to="/"
+            className="p-2 hover:bg-gray-200 rounded-lg transition duration-300"
+          >
             <HiMiniBars3CenterLeft className="size-6 text-gray-700" />
           </Link>
 
@@ -58,7 +73,10 @@ const Navbar = () => {
                 {/* Dropdown Menu */}
                 {isDropdownOpen && (
                   <div className="absolute right-20 mt-4 w-48 bg-white shadow-lg rounded-md z-40 border border-gray-200">
-                    <ul className="py-2" onClick={() => setIsDropDownOpen(false)}>
+                    <ul
+                      className="py-2"
+                      onClick={() => setIsDropDownOpen(false)}
+                    >
                       {Navigation.map((item) => (
                         <li key={item.name}>
                           <Link
@@ -74,7 +92,10 @@ const Navbar = () => {
                 )}
               </>
             ) : (
-              <Link to="/login" className="hover:text-blue-500 transition duration-300">
+              <Link
+                to="/login"
+                className="hover:text-blue-500 transition duration-300"
+              >
                 <FaRegUser className="text-xl" />
               </Link>
             )}
@@ -86,7 +107,10 @@ const Navbar = () => {
           </button>
 
           {/* Cart Icon with Badge */}
-          <Link to="/cart" className="relative hover:text-blue-500 transition duration-300">
+          <Link
+            to="/cart"
+            className="relative hover:text-blue-500 transition duration-300"
+          >
             <HiOutlineShoppingCart className="text-2xl" />
             {cartItems.length > 0 && (
               <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">
@@ -106,13 +130,20 @@ const Navbar = () => {
 
             <Link
               to="/register"
-             className="bg-blue-700 text-white px-4 py-2 rounded-full hover:bg-blue-600 hover:scale-105 transition duration-300 text-sm font-medium shadow-md w-24 text-center"
+              className="bg-blue-700 text-white px-4 py-2 rounded-full hover:bg-blue-600 hover:scale-105 transition duration-300 text-sm font-medium shadow-md w-24 text-center"
             >
               Register
             </Link>
           </div>
         </div>
       </nav>
+
+      {/* Cart Success Message */}
+      {cartMessage && (
+        <div className="fixed top-16 left-1/2 transform -translate-x-1/2 bg-slate-50 text-blue px-6 py-3 rounded-lg shadow-lg text-sm font-semibold transition-all duration-300 border-spacing-2 border border-cyan-500">
+          {cartMessage}
+        </div>
+      )}
     </div>
   );
 };

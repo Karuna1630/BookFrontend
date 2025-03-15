@@ -34,7 +34,7 @@ const CartPage = () => {
               <button
                 type="button"
                 onClick={handleClearCart}
-                className="relative -m-2 py-1 px-2 bg-red-500 text-white rounded-md hover:bg-secondary transition-all duration-200  "
+                className="relative -m-2 py-1 px-2 bg-red-500 text-white rounded-md hover:bg-secondary transition-all duration-75  "
               >
                 <span className="">Clear Cart</span>
               </button>
@@ -61,7 +61,7 @@ const CartPage = () => {
                             <h3>
                               <Link to="/">{product?.title}</Link>
                             </h3>
-                            <p className="sm:ml-4">${product?.newPrice}</p>
+                            <p className="sm:ml-4">Rs.{product?.newPrice}</p>
                           </div>
                           <p className="mt-1 text-sm text-gray-500 capitalize">
                             <strong>Category: </strong>
@@ -97,7 +97,7 @@ const CartPage = () => {
         <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
           <div className="flex justify-between text-base font-medium text-gray-900">
             <p>Subtotal</p>
-            <p>${totalPrice ? totalPrice : 0}</p>
+            <p>Rs.{totalPrice ? totalPrice : 0}</p>
           </div>
           <p className="mt-0.5 text-sm text-gray-500">
             Shipping and taxes calculated at checkout.
