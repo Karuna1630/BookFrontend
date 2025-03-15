@@ -1,0 +1,75 @@
+[
+    {
+      "_id": 1,
+      "title": "How to Grow Your Store",
+      "description": "Learn the best strategies to grow your online store in today's competitive market.",
+      "category": "business",
+      "trending": true,
+      "coverImage": "book-1.png",
+      "exchange": {
+        "money": 15.99,
+        "books": ["Mastering SEO in 2024"]
+      }
+    },
+    {
+      "_id": 2,
+      "title": "Top 10 Fiction Books This Year",
+      "description": "A curated list of the best fiction books that are trending this year.",
+      "category": "books",
+      "trending": true,
+      "coverImage": "book-2.png",
+      "exchange": {
+        "money": 10.99,
+        "books": ["The Hunger Games"]
+      }
+    },
+    {
+      "_id": 3,
+      "title": "Mastering SEO in 2024",
+      "description": "Tips and tricks to boost your SEO and rank higher on search engines.",
+      "category": "marketing",
+      "trending": true,
+      "coverImage": "book-3.png",
+      "exchange": {
+        "money": 22.99,
+        "books": ["How to Grow Your Online Store"]
+      }
+    },
+    {
+      "_id": 4,
+      "title": "Best eCommerce Platforms",
+      "description": "A comprehensive guide on choosing the best eCommerce platforms for 2024.",
+      "category": "business",
+      "trending": false,
+      "coverImage": "book-4.png",
+      "exchange": {
+        "money": 30.99,
+        "books": ["Four Thousand Weeks"]
+      }
+    },
+    {
+      "_id": 5,
+      "title": "Non-Fiction Reads You Must Try",
+      "description": "Our top picks for non-fiction books to add to your reading list.",
+      "category": "books",
+      "trending": true,
+      "coverImage": "book-5.png",
+      "exchange": {
+        "money": 7.99,
+        "books": ["To Kill a Mockingbird"]
+      }
+    },
+    {
+      "_id": 6,
+      "title": "Ultimate Guide to Digital Marketing",
+      "description": "A complete guide to digital marketing strategies for 2024.",
+      "category": "marketing",
+      "trending": false,
+      "coverImage": "book-6.png",
+      "exchange": {
+        "money": 25.99,
+        "books": ["Mastering SEO in 2024"]
+      }
+    }
+  ]
+  
