@@ -29,49 +29,77 @@ const Recommended = () => {
   }, []);
 
   return (
-    <div className="px-10 py-6 relative bg-gradient-to-r from-blue-50 to-blue-200">
-      <h2 className="text-4xl font-semibold mb-6">Recommended For You</h2>
-
-      {/* Custom Navigation Buttons */}
-      <div className="relative">
-        <button
-          ref={prevButtonRef}
-         className="absolute left-[-40px] ml-2 top-1/2 w-10 h-10 transform -translate-y-1/2 z-10 bg-blue-500 text-white  rounded-full shadow-lg hover:bg-blue-600 transition"
-        >
-          ❮
-        </button>
-        <button
-          ref={nextButtonRef}
-          className="absolute right-[-40px] mr-2 top-1/2 w-10 h-10 transform -translate-y-1/2 z-10 bg-blue-500 text-white  rounded-full shadow-lg hover:bg-blue-600 transition"
-        >
-          ❯
-        </button>
-
-        <Swiper
-          ref={swiperRef}
-          slidesPerView={1}
-          spaceBetween={30}
-          navigation={{
-            prevEl: prevButtonRef.current,
-            nextEl: nextButtonRef.current,
-          }}
-          breakpoints={{
-            640: { slidesPerView: 1, spaceBetween: 20 },
-            768: { slidesPerView: 2, spaceBetween: 40 },
-            1024: { slidesPerView: 2, spaceBetween: 50 },
-            1080: { slidesPerView: 3, spaceBetween: 50 },
-          }}
-          modules={[Pagination, Navigation]}
-          className="mySwiper"
-        >
-          {books.length > 0 &&
-            books.slice(8, 16).map((book, index) => (
-              <SwiperSlide key={index}>
-                <BookCard book={book} />
-              </SwiperSlide>
-            ))}
-        </Swiper>
+    <div className="container mx-auto px-4 py-8">
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-bold">Recommended Books</h2>
+        <div className="flex gap-2">
+          <button
+            ref={prevButtonRef}
+            className="p-2 rounded-full bg-gray-200 hover:bg-gray-300"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15.75 19.5L8.25 12l7.5-7.5"
+              />
+            </svg>
+          </button>
+          <button
+            ref={nextButtonRef}
+            className="p-2 rounded-full bg-gray-200 hover:bg-gray-300"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M8.25 4.5l7.5 7.5-7.5 7.5"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
+      <Swiper
+        ref={swiperRef}
+        modules={[Navigation, Pagination]}
+        spaceBetween={20}
+        slidesPerView={1}
+        navigation={{
+          prevEl: prevButtonRef.current,
+          nextEl: nextButtonRef.current,
+        }}
+        breakpoints={{
+          640: {
+            slidesPerView: 2,
+          },
+          768: {
+            slidesPerView: 3,
+          },
+          1024: {
+            slidesPerView: 4,
+          },
+        }}
+      >
+        {books.map((book) => (
+          <SwiperSlide key={book._id}>
+            <BookCard book={book} onExchangeClick={() => {}} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   );
 };

@@ -123,14 +123,14 @@ const Navbar = () => {
           <div className="flex gap-2">
             <Link
               to="/login"
-              className="bg-blue-700 text-white px-4 py-2 rounded-full hover:bg-blue-600 hover:scale-105 transition duration-300 text-sm font-medium shadow-md w-24 text-center"
+              className="bg-blue-700 text-white px-4 py-2 rounded-full hover:bg-blue-500 hover:scale-105 transition duration-300 text-sm font-medium shadow-md w-24 text-center"
             >
               Login
             </Link>
 
             <Link
               to="/register"
-              className="bg-blue-700 text-white px-4 py-2 rounded-full hover:bg-blue-600 hover:scale-105 transition duration-300 text-sm font-medium shadow-md w-24 text-center"
+              className="bg-blue-700 text-white px-4 py-2 rounded-full hover:bg-blue-500 hover:scale-105 transition duration-300 text-sm font-medium shadow-md w-24 text-center"
             >
               Register
             </Link>

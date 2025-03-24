@@ -1,56 +1,18 @@
-import Footer from "../../Components/Footer";
-import BookCard from "../Books/BookCard";
-import booksData from "../../../public/book.json";
-import { useState, useEffect } from "react";
-import Navbar from "../../Components/navbar";
-import { useSearchParams } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
+import React, { useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+import BookCard from './BookCard';
 import { FiDollarSign, FiBook, FiX } from "react-icons/fi";
 import { getImgUrl } from "../../Utils/getImgUrl";
 
-const categories = [
-  { name: "All Books", value: "All" },
-  { name: "Business", value: "Business" },
-  { name: "Fiction", value: "Fiction" },
-  { name: "Horror", value: "Horror" },
-  { name: "Adventure", value: "Adventure" },
-  { name: "Exchange", value: "Exchange" }
-];
+import 'swiper/css';
+import 'swiper/css/navigation';
 
-const Product = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [selectedCategory, setSelectedCategory] = useState(searchParams.get("category") || "All");
-  const [filteredBooks, setFilteredBooks] = useState([]);
+const Recommended = ({ books }) => {
   const [showExchange, setShowExchange] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
   const [exchangeType, setExchangeType] = useState('money');
   const [exchangeAmount, setExchangeAmount] = useState('');
-
-  useEffect(() => {
-    if (selectedCategory === "All") {
-      setFilteredBooks(booksData);
-    } else if (selectedCategory === "Exchange") {
-      const exchangeBooks = booksData.filter(book => book.exchange);
-      setFilteredBooks(exchangeBooks);
-    } else {
-      const filtered = booksData.filter(book => {
-        const categoryLower = selectedCategory.toLowerCase();
-        
-        return (book.category && book.category.toLowerCase() === categoryLower) ||
-               (book.genre && book.genre.toLowerCase() === categoryLower) ||
-               (book.categories && Array.isArray(book.categories) && 
-                book.categories.some(cat => cat.toLowerCase() === categoryLower)) ||
-               (book.type && book.type.toLowerCase() === categoryLower);
-      });
-      
-      setFilteredBooks(filtered);
-    }
-  }, [selectedCategory]);
-
-  const handleCategoryChange = (category) => {
-    setSelectedCategory(category);
-    setSearchParams({ category });
-  };
 
   const handleExchangeClick = (book) => {
     setSelectedBook(book);
@@ -66,56 +28,27 @@ const Product = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-50 to-blue-200">
-      <Navbar />
-
-      {/* Category Navigation */}
-      <div className="bg-white shadow-md">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center gap-2 overflow-x-auto py-4 whitespace-nowrap">
-            {categories.map((category) => (
-              <button
-                key={category.value}
-                onClick={() => handleCategoryChange(category.value)}
-                className={`px-4 py-2 rounded-lg transition-colors duration-200
-                  ${selectedCategory === category.value 
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
-              >
-                {category.name}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="container mx-auto px-4 py-8">
-        {/* Header Section */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">
-            {selectedCategory === "All" ? "All Books" : `${selectedCategory} Books`}
-          </h1>
-          <p className="text-gray-600">
-            Browse our collection of {selectedCategory.toLowerCase()} books
-          </p>
-        </div>
-
-        {/* Books Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredBooks.length > 0 ? (
-            filteredBooks.map((book) => (
-              <div key={book._id} className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <BookCard book={book} onExchangeClick={() => handleExchangeClick(book)} />
-              </div>
-            ))
-          ) : (
-            <div className="col-span-3 text-center py-16">
-              <h3 className="text-2xl text-gray-500 mb-4">No books found in this category</h3>
-              <p className="text-gray-400">Try selecting a different category</p>
-            </div>
-          )}
-        </div>
-      </div>
+    <div className="container mx-auto px-4 py-8">
+      <h2 className="text-2xl font-bold mb-6">Recommended Books</h2>
+      
+      <Swiper
+        modules={[Navigation]}
+        spaceBetween={20}
+        slidesPerView={1}
+        navigation
+        breakpoints={{
+          640: { slidesPerView: 2 },
+          768: { slidesPerView: 3 },
+          1024: { slidesPerView: 4 },
+        }}
+        className="recommended-swiper"
+      >
+        {books.map((book) => (
+          <SwiperSlide key={book._id}>
+            <BookCard book={book} onExchangeClick={() => handleExchangeClick(book)} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
 
       {/* Exchange Options Modal */}
       {showExchange && selectedBook && (
@@ -204,10 +137,8 @@ const Product = () => {
           </div>
         </div>
       )}
-
-      <Footer />
     </div>
   );
 };
 
-export default Product;
+export default Recommended; 

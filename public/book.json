@@ -2,66 +2,81 @@
     {
       "_id": 1,
       "title": "How to Grow Your Online Store",
+      "author": "Sarah Johnson",
       "description": "Learn the best strategies to grow your online store in today's competitive market.",
       "category": "business",
-      "trending": true,
       "coverImage": "book-1.png",
       "oldPrice": 899,
-      "newPrice": 799
+      "newPrice": 799,
+      "trending": true,
+      "exchange": {
+        "money": 199,
+        "books": ["Mastering SEO in 2024"]
+      }
     },
     {
       "_id": 2,
       "title": "Top 10 Fiction Books This Year",
+      "author": "Michael Brown",
       "description": "A curated list of the best fiction books that are trending this year.",
       "category": "books",
-      "trending": true,
       "coverImage": "book-2.png",
       "oldPrice": 500,
-      "newPrice": 450
+      "newPrice": 450,
+      "trending": true,
+      "exchange": {
+        "money": 299,
+        "books": ["The Hunger Games"]
+      }
     },
     {
       "_id": 3,
       "title": "Mastering SEO in 2024",
+      "author": "Sarah Johnson",
       "description": "Tips and tricks to boost your SEO and rank higher on search engines.",
       "category": "marketing",
-      "trending": true,
       "coverImage": "book-3.png",
       "oldPrice": 900,
-      "newPrice": 500
+      "newPrice": 500,
+      "trending": true
     },
     {
       "_id": 4,
       "title": "Best eCommerce Platforms",
+      "author": "Sarah Johnson",
       "description": "A comprehensive guide on choosing the best eCommerce platforms for 2024.",
       "category": "business",
-      "trending": false,
       "coverImage": "book-4.png",
       "oldPrice": 499,
-      "newPrice": 299
+      "newPrice": 299,
+      "trending": false
     },
     {
       "_id": 5,
       "title": "Non-Fiction Reads You Must Try",
+      "author": "Sarah Johnson",
       "description": "Our top picks for non-fiction books to add to your reading list.",
       "category": "books",
-      "trending": true,
       "coverImage": "book-5.png",
       "oldPrice": 1000,
-      "newPrice": 500
+      "newPrice": 500,
+      "trending": true
     },
     {
       "_id": 6,
       "title": "Ultimate Guide to Digital Marketing",
+      "author": "Sarah Johnson",
       "description": "A complete guide to digital marketing strategies for 2024.",
       "category": "marketing",
-      "trending": false,
       "coverImage": "book-6.png",
       "oldPrice": 490,
-      "newPrice": 399
+      "newPrice": 399,
+      "trending": false
     },
     {
       "_id": 7,
       "title": "The First Days",
+      "author": "Sarah Johnson",
       "description": "Katie is driving to work one beautiful day when a dead man jumps into her car and tries to eat her.  That same morning, Jenni opens a bedroom door to find her husband devouring their toddler son. ",
       "category": "horror",
       "trending": true,
@@ -122,7 +137,7 @@
     {
       "_id": 13,
       "title": "The Picture of Dorian Gray",
-      "description": "Oscar Wilde’s only novel is the dreamlike story of a young man who sells his soul for eternal youth and beauty.",
+      "description": "Oscar Wilde's only novel is the dreamlike story of a young man who sells his soul for eternal youth and beauty.",
       "category": "horror",
       "trending": true,
       "coverImage": "book-13.png",
@@ -161,7 +176,7 @@
     },
     {
       "_id": 17,
-      "title": "Alice’s Adventures in Wonderland",
+      "title": "Alice's Adventures in Wonderland",
       "description": "When Alice sees a white rabbit take a watch out of its waistcoat pocket she decides to follow it, and a sequence of most unusual events is set in motion. This mini book contains the entire topsy-turvy stories of Alice's Adventures in Wonderland",
       "category": "adventure",
       "trending": true,
@@ -192,12 +207,16 @@
     {
       "_id": 20,
       "title": "Four Thousand Weeks",
-      "description": "Nobody needs to be told there isn’t enough time. We’re obsessed with our lengthening to-do lists, overfilled inboxes, work-life balance, and ceaseless battle against distraction; we’re deluged with advice on becoming more productive and efficient",
+      "description": "Nobody needs to be told there isn't enough time. We're obsessed with our lengthening to-do lists, overfilled inboxes, work-life balance, and ceaseless battle against distraction; we're deluged with advice on becoming more productive and efficient",
       "category": "business",
       "trending": false,
       "coverImage": "book-20.png",
       "oldPrice": 500,
-      "newPrice": 450
+      "newPrice": 450,
+      "exchange": {
+        "money": 199,
+        "books": ["Best eCommerce Platforms"]
+      }
     }
   ]
   

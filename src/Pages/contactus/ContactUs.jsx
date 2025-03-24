@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import Navbar from '../../Components/Navbar';
+
 import Footer from '../../Components/Footer';
+import Navbar from '../../Components/navbar';
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -25,7 +26,7 @@ const ContactUs = () => {
   return (
     <div className='bg-gradient-to-r  from-blue-50 to-blue-200'>
         <Navbar/>
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
+    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md mt-5 mb-10">
       <h1 className="text-2xl font-bold text-center mb-6">Contact Us</h1>
       
       {submitted ? (

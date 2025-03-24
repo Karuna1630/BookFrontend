@@ -1,26 +1,33 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { FaGoogle } from "react-icons/fa";
-import { useForm } from "react-hook-form";
-import Navbar from '../../Components/Navbar';
 import Footer from '../../Components/Footer';
-import { validationRules } from './validation'; // Import validation rules
+
+import validation from './loginval';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Navbar from '../../Components/navbar';
 
 const Login = () => {
-  const [message, setMessage] = useState("");
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const navigate = useNavigate();
+  const [errors, setErrors] = useState({});
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const validationErrors = validation({ email, password });
+    setErrors(validationErrors);
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
-
-  const handleGoogleSignIn = async () => {
-    // Implement Google Sign-In logic here
+    // If there are no errors, submit the form
+    if (Object.keys(validationErrors).length === 0) {
+      axios.post('http://localhost:3001/login', {email, password})
+        .then(result => {
+          console.log(result);
+          navigate('/');
+        })
+        .catch(error => console.log(error));
+    }
   };
 
   return (
@@ -31,45 +38,47 @@ const Login = () => {
           <h2 className='text-xl font-semibold mb-4'>Please Login</h2>
 
           {/* Form with validation */}
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit}>
             <div className='mb-4'>
               <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor="email">Email</label>
-              <input 
-                {...register("email", validationRules.email)} // Use the imported validation rules
+              <input
+
                 type="email"
                 name="email"
                 id="email"
                 placeholder='Email Address'
+                onChange={(e) => setEmail(e.target.value)}
                 className='shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow'
               />
-              {errors.email && <p className='text-red-500 text-xs italic'>{errors.email.message}</p>} {/* Show error message */}
+              {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+
             </div>
 
             <div className='mb-4'>
               <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor="password">Password</label>
-              <input 
-                {...register("password", validationRules.password)} // Use the imported validation rules
+              <input
+
                 type="password"
                 name="password"
                 id="password"
                 placeholder='Password'
+                onChange={(e) => setPassword(e.target.value)}
                 className='shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow'
               />
-              {errors.password && <p className='text-red-500 text-xs italic'>{errors.password.message}</p>} {/* Show error message */}
-            </div>
+              {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
 
-            {message && <p className='text-red-500 text-xs italic mb-3'>{message}</p>}
+            </div>
 
             <div>
               <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded focus:outline-none'>Login</button>
             </div>
           </form>
 
-          <p className='align-baseline font-medium mt-4 text-sm'>Haven't an account? Please <Link to="/register" className='text-blue-500 hover:text-blue-700'>Register</Link></p>
+          <p className='align-baseline font-medium mt-4 text-sm'>Haven&apos;t an account? Please <Link to="/register" className='text-blue-500 hover:text-blue-700'>Register</Link></p>
 
           {/* Google Sign-In Button */}
           <div className='mt-4'>
-            <button 
+            <button
               className='w-full flex flex-wrap gap-1 items-center justify-center bg-secondary hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none'>
               <FaGoogle className='mr-2' />
               Sign in with Google
